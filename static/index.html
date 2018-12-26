@@ -35,7 +35,6 @@
               </nav>
             </div>
           </div>
-
           <div class="inner cover">
             <h1 class="cover-heading">Poor Yorick!!! Have Fun!!!</h1>
             <p class="lead">To play a random composition click on the button</p>
@@ -43,13 +42,6 @@
               <a href="#" class="btn btn-lg btn-secondary"  onclick="myFunction()">Play Random</a>
             </p>
           </div>
-
-          <div class="mastfoot">
-            <div class="inner">
-              <p>Yorick Have Fun Inc <a href="https://yorick.com">don't click</a>, by <a href="https://yorick.com/">@yorick</a>.</p>
-            </div>
-          </div>
-
         </div>
         <hr>
         <h1 class="cover-heading">You Can!!! Download File!!!</h1>
@@ -62,10 +54,10 @@
         <hr>
         <h1 class="cover-heading">You Can!!! PICK A FILE MP#!!!</h1>
         <div class="cover-container">
-        <form>
+        <form method="post" action="play_song">
           <div class="col-auto my-1">
             <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="select_song">
               <option selected>Choose... You destiny!</option>
             </select>
           </div>
@@ -73,6 +65,13 @@
             <button type="submit" class="btn btn-danger">Submit</button>
           </div>
       </form>
+        </div>
+        <div class="cover-container">
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Yorick Have Fun Inc <a href="https://yorick.com">don't click</a>, by <a href="https://yorick.com/">@yorick</a>.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

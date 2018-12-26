@@ -66,14 +66,27 @@ class Yorick(object):
     @cherrypy.expose
     def list(self):
         print("hello")
-        #dir_t = "/home/gress/work/terminator"
+        # dir_t = "/home/gress/work/terminator"
         dir_t = "C:/Users/ank/Downloads/Telegram Desktop"
+        # dir_t = "C:/work"
         only_files = [f for f in listdir(dir_t) if isfile(join(dir_t, f))]
         list_mp3 = []
         for mp in only_files:
             if mp.endswith('.mp3'):
                 list_mp3.append(mp)
         return json.dumps(list_mp3)
+
+    @cherrypy.expose
+    def play_song(self, select_song):
+        print(select_song)
+        subprocess.check_call(["mpg123", select_song])
+        raise cherrypy.HTTPRedirect("/")
+
+    @cherrypy.expose
+    def upload_by_url(self, data):
+        print(data)
+        # subprocess.check_call(["mpg123", select_song])
+        return '{"status":200}'
 
 
 configuration = {
