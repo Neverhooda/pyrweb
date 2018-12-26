@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import cherrypy
+import os
+import json
 from os.path import abspath
 
 import subprocess
@@ -35,6 +37,44 @@ class Yorick(object):
         return mp3_files
         # return '{"status":200}'
 
+    @cherrypy.expose
+    def upload(self, ufile):
+        upload_path = os.path.dirname(__file__)
+        upload_filename = ufile.filename
+        upload_file = os.path.normpath(
+            os.path.join(upload_path, upload_filename))
+        size = 0
+        with open(upload_file, 'wb') as out:
+            while True:
+                data = ufile.file.read(8192)
+                if not data:
+                    break
+                out.write(data)
+                size += len(data)
+        out = '''
+            File received.
+            Filename: {}
+            Length: {}
+            Mime-type: {}
+            '''.format(ufile.filename, size, ufile.content_type, data)
+        # return out
+        if upload_filename.endswith('.mp3'):
+            print(upload_file)
+            subprocess.check_call(["mpg123", upload_filename])
+        raise cherrypy.HTTPRedirect("/")
+
+    @cherrypy.expose
+    def list(self):
+        print("hello")
+        #dir_t = "/home/gress/work/terminator"
+        dir_t = "C:/Users/ank/Downloads/Telegram Desktop"
+        only_files = [f for f in listdir(dir_t) if isfile(join(dir_t, f))]
+        list_mp3 = []
+        for mp in only_files:
+            if mp.endswith('.mp3'):
+                list_mp3.append(mp)
+        return json.dumps(list_mp3)
+
 
 configuration = {
             '/': {
@@ -43,7 +83,7 @@ configuration = {
                 },
 }
 
-cherrypy.config.update({'server.socket_host': '64.72.221.48',
+cherrypy.config.update({'server.socket_host': '127.0.0.1',
                         'server.socket_port': 80,
                        })
 

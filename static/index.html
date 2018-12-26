@@ -51,12 +51,39 @@
           </div>
 
         </div>
-
+        <hr>
+        <h1 class="cover-heading">You Can!!! Download File!!!</h1>
+        <div class="cover-container">
+          <form method="post" action="upload" enctype="multipart/form-data">
+              <input type="file" name="ufile" />
+              <input type="submit" class="btn btn-dark" />
+          </form>
+        </div>
+        <hr>
+        <h1 class="cover-heading">You Can!!! PICK A FILE MP#!!!</h1>
+        <div class="cover-container">
+        <form>
+          <div class="col-auto my-1">
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+              <option selected>Choose... You destiny!</option>
+            </select>
+          </div>
+          <div class="col-auto my-1">
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </div>
+      </form>
+        </div>
       </div>
-
     </div>
 
     <script>
+
+      if (document.readyState === 'complete') {
+        getData();
+      }
+
+
       function myFunction() {
         var http = new XMLHttpRequest();
         var url = 'play_random';
@@ -73,6 +100,37 @@
         }
         http.send();
       }
+
+      function getData() {
+        var http = new XMLHttpRequest();
+        var url = 'list';
+        // var params = 'orem=ipsum&name=binny';
+        http.open('POST', url, true);
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            if(http.readyState == 4 && http.status == 200) {
+                console.log(http.responseText);
+                updateSelect(JSON.parse(http.responseText))
+            }
+        }
+        http.send();
+      }
+
+      function updateSelect(list_mp3) {
+        select = document.getElementById('inlineFormCustomSelect');
+        for (var i = 0; i < list_mp3.length; i++) {
+          var opt = document.createElement('option');
+          opt.value = list_mp3[i];
+          opt.innerHTML = list_mp3[i];
+          select.appendChild(opt);
+        }
+      }
+
+      window.onload = getData;
+
     </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
