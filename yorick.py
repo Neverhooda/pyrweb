@@ -28,7 +28,7 @@ class Yorick(object):
     @cherrypy.expose
     def play_random(self):
         print("hello")
-        dir_t = "/home/gress/pyrweb/sound"
+        dir_t = "/home/gress/work/pyrweb/sound"
         # dir_t = "C:/Users/ank/Downloads/Telegram Desktop"
         only_files = [f for f in listdir(dir_t) if isfile(join(dir_t, f))]
         mp3_files = []
@@ -68,7 +68,7 @@ class Yorick(object):
     @cherrypy.expose
     def list(self):
         print("hello")
-        dir_t = "/home/gress/pyrweb/sound"
+        dir_t = "/home/gress/work/pyrweb/sound"
         # dir_t = "C:/Users/ank/Downloads/Telegram Desktop"
         # dir_t = "C:/work"
         only_files = [f for f in listdir(dir_t) if isfile(join(dir_t, f))]
