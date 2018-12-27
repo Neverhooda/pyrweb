@@ -41,10 +41,10 @@ class Yorick(object):
 
     @cherrypy.expose
     def upload(self, ufile):
-        upload_path = os.path.dirname(__file__)
+        upload_path = "/home/gress/work/pyrweb/sound"
         upload_filename = ufile.filename
         upload_file = os.path.normpath(
-            os.path.join("%s/%s" % (upload_path, "sound"), upload_filename))
+            os.path.join(upload_path, upload_filename))
         size = 0
         with open(upload_file, 'wb') as out:
             while True:
