@@ -15,7 +15,6 @@
 
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
-
   <body>
     <div class="site-wrapper">
       <div class="site-wrapper-inner">
@@ -24,43 +23,29 @@
             <div class="inner">
               <h3 class="masthead-brand">Poor Yorick</h3>
               <nav class="nav nav-masthead">
-                <a class="nav-link active" href="index">Home</a>
-                <a class="nav-link" href="features">Features</a>
+                <a class="nav-link" href="index">Home</a>
+                <a class="nav-link active" href="features">Features</a>
                 <a class="nav-link" href="#">Contact</a>
               </nav>
             </div>
           </div>
+
           <div class="inner cover">
             <h1 class="cover-heading">Poor Yorick!!! Have Fun!!!</h1>
-            <p class="lead">To play a random composition click on the button</p>
+            <p class="lead">To play with Yorick push of a button</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary"  onclick="myFunction()">Play Random</a>
+              <a href="#" class="btn btn-lg btn-success"  onclick="left_hand_up()">L_H UP</a>
+              <a href="#" class="btn btn-lg btn-info"  onclick="left_hand_down()">L_H DOWN</a>
+              <a href="#" class="btn btn-lg btn-danger"  onclick="left_hand_reset()">L_RESET</a>
+            </p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-success"  onclick="right_hand_up()">R_H UP</a>
+              <a href="#" class="btn btn-lg btn-info"  onclick="right_hand_down()">R_H DOWN</a>
+              <a href="#" class="btn btn-lg btn-danger"  onclick="right_hand_reset()">R_RESET</a>
             </p>
           </div>
         </div>
         <hr>
-        <h1 class="cover-heading">You Can!!! Upload File!!!</h1>
-        <div class="cover-container">
-          <form method="post" action="upload" enctype="multipart/form-data">
-              <input type="file" name="ufile" />
-              <input type="submit" class="btn btn-dark" />
-          </form>
-        </div>
-        <hr>
-        <h1 class="cover-heading">You Can!!! PICK A FILE MP#!!!</h1>
-        <div class="cover-container">
-        <form method="post" action="play_song">
-          <div class="col-auto my-1">
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="select_song">
-              <option selected>Choose... You destiny!</option>
-            </select>
-          </div>
-          <div class="col-auto my-1">
-            <button type="submit" class="btn btn-danger">Submit</button>
-          </div>
-      </form>
-        </div>
         <div class="cover-container">
           <div class="mastfoot">
             <div class="inner">
@@ -135,5 +120,6 @@
     <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+    <script src="js/yorick_cmd.js"></script>
   </body>
 </html>

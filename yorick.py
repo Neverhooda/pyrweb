@@ -1,4 +1,8 @@
-#!/usr/bin/env python
+"""@package Yorick web ui
+web service for ...
+"""
+
+# !/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import cherrypy
@@ -20,6 +24,21 @@ class Yorick(object):
     def index(self):
         with open('static/index.html', 'r') as file:
             return file.readlines()
+
+    @cherrypy.expose
+    def features(self):
+        with open('static/features.html', 'r') as file:
+            return file.readlines()
+
+    @cherrypy.expose
+    def left_hand(self, action, parameters):
+        print("Left", action, parameters)
+        return '{"status":200}'
+
+    @cherrypy.expose
+    def right_hand(self, action, parameters):
+        print("Right", action, parameters)
+        return '{"status":200}'
 
     @cherrypy.expose
     def greet(self, name):
@@ -45,6 +64,7 @@ class Yorick(object):
         upload_filename = ufile.filename
         upload_file = os.path.normpath(
             os.path.join(upload_path, upload_filename))
+
         size = 0
         with open(upload_file, 'wb') as out:
             while True:
@@ -53,13 +73,7 @@ class Yorick(object):
                     break
                 out.write(data)
                 size += len(data)
-        out = '''
-            File received.
-            Filename: {}
-            Length: {}
-            Mime-type: {}
-            '''.format(ufile.filename, size, ufile.content_type, data)
-        # return out
+
         if upload_filename.endswith('.mp3'):
             print(upload_file)
             subprocess.check_call(["mpg123", "sound/%s" % upload_filename])
