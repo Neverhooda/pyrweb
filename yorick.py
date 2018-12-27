@@ -28,7 +28,7 @@ class Yorick(object):
     @cherrypy.expose
     def play_random(self):
         print("hello")
-        dir_t = "/home/gress/work/terminator"
+        dir_t = "/home/gress/pyrweb/sound"
         # dir_t = "C:/Users/ank/Downloads/Telegram Desktop"
         only_files = [f for f in listdir(dir_t) if isfile(join(dir_t, f))]
         mp3_files = []
@@ -44,7 +44,7 @@ class Yorick(object):
         upload_path = os.path.dirname(__file__)
         upload_filename = ufile.filename
         upload_file = os.path.normpath(
-            os.path.join(upload_path, upload_filename))
+            os.path.join("%s/%s" % (upload_path, "sound"), upload_filename))
         size = 0
         with open(upload_file, 'wb') as out:
             while True:
@@ -62,13 +62,13 @@ class Yorick(object):
         # return out
         if upload_filename.endswith('.mp3'):
             print(upload_file)
-            subprocess.check_call(["mpg123", upload_filename])
+            subprocess.check_call(["mpg123", "sound/%s" % upload_filename])
         raise cherrypy.HTTPRedirect("/")
 
     @cherrypy.expose
     def list(self):
         print("hello")
-        # dir_t = "/home/gress/work/terminator"
+        # dir_t = "/home/gress/pyrweb/sound"
         dir_t = "C:/Users/ank/Downloads/Telegram Desktop"
         # dir_t = "C:/work"
         only_files = [f for f in listdir(dir_t) if isfile(join(dir_t, f))]
@@ -91,7 +91,7 @@ class Yorick(object):
         # run()
         name = str(uuid.uuid4())
         subprocess.check_call(["wget", data["url"], "-O", "%s.mp3" % name])
-        subprocess.check_call(["mpg123", "%s.mp3" % name])
+        subprocess.check_call(["mpg123", "sound/%s.mp3" % name])
         return '{"status":200}'
 
 
