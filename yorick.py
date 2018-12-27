@@ -81,7 +81,7 @@ class Yorick(object):
     @cherrypy.expose
     def play_song(self, select_song):
         print(select_song)
-        subprocess.check_call(["mpg123", select_song])
+        subprocess.check_call(["mpg123", "sound/%s" % select_song])
         raise cherrypy.HTTPRedirect("/")
 
     @cherrypy.expose
