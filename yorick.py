@@ -6,8 +6,8 @@ import os
 from os.path import abspath
 
 import json
-import uuid
 import subprocess
+import wget
 
 from os import listdir
 from os.path import isfile, join
@@ -86,12 +86,13 @@ class Yorick(object):
 
     @cherrypy.expose
     def upload_by_url(self):
-        data = cherrypy.request.body.read().decode('utf8').replace("'", '"')
+        data_raw = cherrypy.request.body.read().decode('utf8').replace("'", '"')
+        data = json.loads(data_raw)
         print(data)
         # run()
-        name = str(uuid.uuid4())
-        subprocess.check_call(["wget", data["url"], "-O", "%s.mp3" % name])
-        subprocess.check_call(["mpg123", "sound/%s.mp3" % name])
+        filename = wget.download(data["url"], out="sound")
+        print(filename)
+        subprocess.check_call(["mpg123", filename])
         return '{"status":200}'
 
 
