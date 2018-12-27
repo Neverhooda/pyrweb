@@ -3,10 +3,12 @@
 
 import cherrypy
 import os
-import json
 from os.path import abspath
 
+import json
+import uuid
 import subprocess
+
 from os import listdir
 from os.path import isfile, join
 from random import randint
@@ -83,9 +85,13 @@ class Yorick(object):
         raise cherrypy.HTTPRedirect("/")
 
     @cherrypy.expose
-    def upload_by_url(self, data):
+    def upload_by_url(self):
+        data = cherrypy.request.body.read().decode('utf8').replace("'", '"')
         print(data)
-        # subprocess.check_call(["mpg123", select_song])
+        # run()
+        name = str(uuid.uuid4())
+        subprocess.check_call(["wget", data["url"], "-O", "%s.mp3" % name])
+        subprocess.check_call(["mpg123", "%s.mp3" % name])
         return '{"status":200}'
 
 
