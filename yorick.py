@@ -45,6 +45,12 @@ class Yorick(object):
         return 'Hello {}!'.format(name)
 
     @cherrypy.expose
+    def play_custom(self, sound):
+        print(sound)
+        subprocess.check_call(["mpg123", "sound/%s" % sound])
+        return '{"status":200}'
+
+    @cherrypy.expose
     def play_random(self):
         print("hello")
         dir_t = "/home/gress/work/pyrweb/sound"

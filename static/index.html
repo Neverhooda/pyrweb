@@ -35,6 +35,7 @@
             <p class="lead">To play a random composition click on the button</p>
             <p class="lead">
               <a href="#" class="btn btn-lg btn-secondary"  onclick="myFunction()">Play Random</a>
+              <a href="#" class="btn btn-lg btn-outline-danger"  onclick="myFunction()">Nein</a>
             </p>
           </div>
         </div>
@@ -111,6 +112,24 @@
             }
         }
         http.send();
+      }
+
+       function playCustom() {
+        var http = new XMLHttpRequest();
+        var url = 'play_custom';
+        var params = 'sound=dlay_invalidov_tut.mp3';
+        http.open('POST', url, true);
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            if(http.readyState == 4 && http.status == 200) {
+                console.log(http.responseText);
+                updateSelect(JSON.parse(http.responseText))
+            }
+        }
+        http.send(params);
       }
 
       function updateSelect(list_mp3) {
