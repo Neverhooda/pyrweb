@@ -96,7 +96,7 @@ class Yorick(object):
         for mp in only_files:
             if mp.endswith('.mp3'):
                 list_mp3.append(mp)
-        return json.dumps(list_mp3)
+        return json.dumps(sorted(list_mp3))
 
     @cherrypy.expose
     def play_song(self, select_song):
